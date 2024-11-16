@@ -15,7 +15,7 @@ const Banner = () => {
         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem
         quasi. In deleniti eaque aut repudiandae et a id nisi.
       </p>
-      <button className="btn btn-ghost border-0 border-b-2 border-gray-500 ">Get Started</button>
+      <button className="btn btn-ghost border-0 border-b-2 border-gray-500">Get Started</button>
     </div>
   </div>
 </div>

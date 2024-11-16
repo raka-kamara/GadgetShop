@@ -54,12 +54,16 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
         <div className="navbar-end gap-5">
-          <button className="btn btn-ghost border-0 border-b-2 border-gray-500 ">
+         <Link to="/login">
+         <button className="btn btn-ghost border-0 border-b-2 border-gray-500 ">
             Sign In
           </button>
-          <button className="btn btn-ghost border-0 border-b-2 border-gray-500 ">
+         </Link>
+         <Link to="/register">
+         <button className="btn btn-ghost border-0 border-b-2 border-gray-500 ">
             Register
           </button>
+         </Link>
         </div>
       </div>
     </div>
