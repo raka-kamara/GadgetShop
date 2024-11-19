@@ -1,6 +1,19 @@
-import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import GoogleLogin from "../Components/Shared/GoogleLogin";
 
 const Login = () => {
+  const {Login} = useAuth();
+  const navigate = useNavigate();
+
+  const { register, handleSubmit, watch, formState: {errors} } = useForm();
+
+  const onSubmit = (data) => {
+    Login(data.email, data.password)
+    navigate("/")
+  }
+
   return (
     <div>
       <div className="hero bg-base-200 min-h-screen">
@@ -8,14 +21,12 @@ const Login = () => {
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Register now!</h1>
             <p className="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+              Welcome Again!
             </p>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form className="card-body">
-              <div className="form-control">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+            <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
@@ -23,8 +34,9 @@ const Login = () => {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
-                  required
-                />
+                  {...register("email", {required: true})}
+                  
+                />{errors.email && (<p className="text-red-500 text-sm font-light">Email is Required</p>)}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -34,15 +46,18 @@ const Login = () => {
                   type="password"
                   placeholder="password"
                   className="input input-bordered"
-                  required
+                  {...register("password", {required: true, minLength:6})}
                 />
+                {errors.password?.type === "required" && (<p className="text-red-600 text-sm font-light">Password is Required</p>)}
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-ghost border-0 border-b-2 border-gray-500">
+                <button type="submit" className="btn btn-ghost border-0 border-b-2 border-gray-500">
                   Login
                 </button>
+                
               </div>
             </form>
+            <GoogleLogin/>
             <p className="my-4 text-sm text-center font-light">
              New Here? <Link to="/register">Register</Link>
             </p>

@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import UserDropDown from "./UserDropDown";
 
 const Navbar = () => {
+  const {user} = useAuth();
   const navOptions = (
     <>
       <li>
@@ -22,7 +25,7 @@ const Navbar = () => {
   );
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -46,14 +49,22 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               {navOptions}
+             
             </ul>
           </div>
-          <a className="btn btn-ghost text-xl">GadgetShop</a>
+          <a className="btn btn-ghost text-xl md:text-2xl font-bold">GadgetShop</a>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navOptions}</ul>
         </div>
-        <div className="navbar-end gap-5">
+
+        {
+          user ? (
+            <div className=" navbar-end">
+              <UserDropDown/>
+        </div>
+          ): (
+             <div className="navbar-end gap-5">
          <Link to="/login">
          <button className="btn btn-ghost border-0 border-b-2 border-gray-500 ">
             Sign In
@@ -65,6 +76,12 @@ const Navbar = () => {
           </button>
          </Link>
         </div>
+          )
+        }
+
+        
+
+       
       </div>
     </div>
   );
